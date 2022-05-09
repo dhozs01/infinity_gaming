@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Infinity Gaming</string>
+    <string name="name">Name</string>
+    <string name="password">Password</string>
+    <string name="confirmPassword">Confirm password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="search">Search</string>
+    <string name="trendyGames">Trendy games</string>
+    <string name="buy">Buy</string>
+    <string name="bestSellers">Best Sellers</string>
+    <string name="termsAndConditions">Terms and conditions</string>
+    <string name="privacyPolitics">Privacy politics</string>
+    <string name="contact">Contact</string>
+    <string name="FAQ">FAQ</string>
+</resources>
