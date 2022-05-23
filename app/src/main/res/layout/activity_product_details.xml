@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/nombreJuego" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/buyButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
@@ -87,7 +87,7 @@
                 android:layout_marginBottom="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button" />
+                app:layout_constraintTop_toBottomOf="@+id/buyButton" />
 
 
         </LinearLayout>

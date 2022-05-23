@@ -13,9 +13,6 @@
             android:name=".ProductDetails"
             android:exported="false" />
         <activity
-            android:name=".Producto"
-            android:exported="false" />
-        <activity
             android:name=".Tienda"
             android:exported="false" />
         <activity

@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.example.infinitygaming.adapter.BestSellerAdapter;
 import com.example.infinitygaming.adapter.TrendyProductsAdapter;
@@ -18,6 +20,7 @@ public class Tienda extends AppCompatActivity {
     TrendyProductsAdapter trendyProductsAdapter;
     BestSellerAdapter bestSellerAdapter;
     List<TrendyProducts> trendyProductsList,bestSellerList;
+    TextView nameText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,9 @@ public class Tienda extends AppCompatActivity {
 
         trendyRecyclerView = findViewById(R.id.trendyRecycler);
         bestSellerRecyclerView = findViewById(R.id.bestSellerRecycler);
+        this.nameText = findViewById(R.id.nameText);
+        Intent i = getIntent();
+        this.nameText.setText(i.getStringExtra("name"));
 
         trendyProductsList = new ArrayList<>();
         trendyProductsList.add(new TrendyProducts(1,"Elden Ring","Elden Ring para PC es un RPG de acción (ARPG) escrito por las superestrellas George RR Martin (el autor de la serie de libros Song of Ice and Fire que engendró la serie de televisión Game of Thrones) y Hidetaka Miyazaki (que es famoso por muchos videojuegos, como los de la serie Souls, Bloodborne o Sekiro, entre otros).","43,99€",R.drawable.eldenring));

@@ -9,6 +9,9 @@
     <string name="trendyGames">Trendy games</string>
     <string name="buy">Buy</string>
     <string name="bestSellers">Best Sellers</string>
+    <string name="buyComplete">Purchase succesful</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancel</string>
     <string name="termsAndConditions">Terms and conditions</string>
     <string name="privacyPolitics">Privacy politics</string>
     <string name="contact">Contact</string>
