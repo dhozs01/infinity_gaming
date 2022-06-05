@@ -7,7 +7,7 @@
     tools:context=".Register">
 
     <EditText
-        android:id="@+id/usernameInput"
+        android:id="@+id/gameNameInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -23,7 +23,7 @@
         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <EditText
-        android:id="@+id/dniInput"
+        android:id="@+id/descInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -35,11 +35,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameInput"
+        app:layout_constraintTop_toBottomOf="@+id/gameNameInput"
         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <EditText
-        android:id="@+id/telefonoInput"
+        android:id="@+id/priceInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -51,7 +51,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/dniInput"
+        app:layout_constraintTop_toBottomOf="@+id/descInput"
         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <EditText
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/telefonoInput"
+        app:layout_constraintTop_toBottomOf="@+id/priceInput"
         tools:ignore="TouchTargetSizeCheck,TouchTargetSizeCheck,DuplicateClickableBoundsCheck" />
 
     <EditText

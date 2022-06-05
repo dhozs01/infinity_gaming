@@ -24,11 +24,11 @@ public class Register extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         this.registerButton = findViewById(R.id.registerCButton);
-        this.nameText = findViewById(R.id.usernameInput);
+        this.nameText = findViewById(R.id.gameNameInput);
         this.passText = findViewById(R.id.passwordInput);
         this.cPassText = findViewById(R.id.cPasswordInput);
-        this.telefonoText = findViewById(R.id.telefonoInput);
-        this.dniText = findViewById(R.id.dniInput);
+        this.telefonoText = findViewById(R.id.priceInput);
+        this.dniText = findViewById(R.id.descInput);
         this.tarjetaText = findViewById(R.id.tarjetaInput);
 
         ArrayList<Usuario> usuarios = new ArrayList<>();

@@ -9,6 +9,14 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
     <string name="search">Search</string>
+    <string name="gameName">Game name</string>
+    <string name="addImage">Add image</string>
+    <string name="deleteImage">Delete image</string>
+    <string name="gender">Gender:</string>
+    <string name="rol">Rol:</string>
+    <string name="confirm">Confirm</string>
+    <string name="description">Game description</string>
+    <string name="price">Game price</string>
     <string name="trendyGames">Trendy games</string>
     <string name="buy">Buy</string>
     <string name="bestSellers">Best Sellers</string>

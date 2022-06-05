@@ -18,18 +18,23 @@ import com.example.infinitygaming.ProductDetails;
 import com.example.infinitygaming.R;
 import com.example.infinitygaming.Videojuego;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VideojuegoAdapter extends RecyclerView.Adapter<VideojuegoAdapter.VideojuegoViewHolder> {
 
     Context context;
     List<Videojuego> listaVideojuegos;
+    List<Videojuego> listaOriginal;
 
 
 
     public VideojuegoAdapter(Context context, List<Videojuego> trendyProductsList) {
         this.context = context;
         this.listaVideojuegos = trendyProductsList;
+        listaOriginal = new ArrayList<>();
+        listaOriginal.addAll(listaVideojuegos);
     }
 
     public void setFilteredList(List<Videojuego> filteredList){
@@ -41,6 +46,29 @@ public class VideojuegoAdapter extends RecyclerView.Adapter<VideojuegoAdapter.Vi
     public VideojuegoViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.trendy_items,parent,false);
         return new VideojuegoViewHolder(view);
+    }
+
+    public void filtrado(String textoBuscar){
+        int longitud = textoBuscar.length();
+        if(longitud == 0){
+            listaVideojuegos.clear();
+            listaVideojuegos.addAll(listaOriginal);
+        }else{
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Videojuego> coleccion = listaVideojuegos.stream()
+                        .filter(i -> i.getDescripcion().toLowerCase().contains(textoBuscar.toLowerCase()))
+                        .collect(Collectors.toList());
+                listaVideojuegos.clear();
+                listaVideojuegos.addAll(coleccion);
+            }else{
+                for (Videojuego v: listaOriginal) {
+                    if(v.getDescripcion().toLowerCase().contains(textoBuscar.toLowerCase())){
+                        listaVideojuegos.add(v);
+                    }
+                }
+            }
+        }
+        notifyDataSetChanged();
     }
 
 

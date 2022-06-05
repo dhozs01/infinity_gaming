@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,7 +19,7 @@ import com.example.infinitygaming.excepciones.ExcepcionInfinityGaming;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tienda extends AppCompatActivity{
+public class Tienda extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     RecyclerView videojuegoRecyclerView;
     VideojuegoAdapter videojuegoAdapter;
@@ -27,6 +28,7 @@ public class Tienda extends AppCompatActivity{
     SearchView searchView;
     ComunicacionServidor comunicacionServidor;
     ImageButton addEmpleadoButton,addVideojuegoButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,22 +42,23 @@ public class Tienda extends AppCompatActivity{
         addVideojuegoButton = findViewById(R.id.addVideojuegoButton);
 
 
-
-        searchView.clearFocus();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+        addVideojuegoButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onQueryTextSubmit(String query) {
-                return false;
+            public void onClick(View view) {
+                Intent i = new Intent(Tienda.this, CrearVideojuego.class);
+                startActivity(i);
             }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filterList(newText);
-                return true;
-            }
-
-
         });
+
+        addEmpleadoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(Tienda.this, CrearEmpleado.class);
+                startActivity(i);
+            }
+        });
+
+
         Intent i = getIntent();
         nameText.setText(i.getStringExtra("name"));
         int idUsuario =  i.getIntExtra("idUsuario",0);
@@ -77,21 +80,12 @@ public class Tienda extends AppCompatActivity{
         }
         setVideojuegoRecycler(listaVideojuegos);
 
+        searchView.setOnQueryTextListener(this);
     }
 
-    private void filterList(String text) {
-        List<Videojuego> filteredList = new ArrayList<>();
-        for(Videojuego videojuego : listaVideojuegos){
-            if(videojuego.getDescripcion().toLowerCase().contains(text.toLowerCase())){
-                filteredList.add(videojuego);
-            }
-        }
-        if(filteredList.isEmpty()){
-            Toast.makeText(this, "No se ha encontrado", Toast.LENGTH_SHORT).show();
-        }else{
-            videojuegoAdapter.setFilteredList(filteredList);
-        }
-    }
+
+
+
 
     private void setVideojuegoRecycler(List<Videojuego> dataList){
         videojuegoRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
@@ -111,7 +105,14 @@ public class Tienda extends AppCompatActivity{
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
 
-
-
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        videojuegoAdapter.filtrado(newText);
+        return false;
+    }
 }
