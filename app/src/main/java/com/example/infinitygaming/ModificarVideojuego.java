@@ -12,8 +12,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.location.Location;
-import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
@@ -25,7 +23,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -38,12 +35,11 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CrearVideojuego extends AppCompatActivity implements ActivityCompat.OnRequestPermissionsResultCallback{
+public class ModificarVideojuego extends AppCompatActivity {
 
     TextView nombreJuegoText,descJuegoText,precioJuegoText;
     Spinner desplegableGenero;
@@ -59,10 +55,12 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_crear_videojuego);
+        setContentView(R.layout.activity_modificar_videojuego);
 
         inicializarComponentes();
         ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+
+
 
 
         comunicacionServidor = new ComunicacionServidor();
@@ -81,6 +79,8 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         spinnerAdapter.notifyDataSetChanged();
 
 
+
+
     }
 
     private void inicializarComponentes(){
@@ -93,7 +93,24 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         anadirJuegoButton = findViewById(R.id.crearVideojuego);
         imagenJuego = findViewById(R.id.gameImageView);
 
-        imagenJuego.setImageDrawable(getResources().getDrawable(R.drawable.avatar));
+        Intent i = getIntent();
+        int idVideojuego = i.getIntExtra("idVideojuego",0);
+        int idGenero = i.getIntExtra("idGenero",0);
+
+        try {
+            ComunicacionServidor comunicacionServidor = new ComunicacionServidor();
+            Videojuego videojuegoAModificar = comunicacionServidor.leerVideojuego(idVideojuego);
+            descJuegoText.setText(videojuegoAModificar.getDescripcion());
+            precioJuegoText.setText(String.valueOf(videojuegoAModificar.getPrecio()));
+            desplegableGenero.setSelection(idGenero);
+            imagenJuego.setImageDrawable(getResources().getDrawable(R.drawable.avatar));
+        } catch (ExcepcionInfinityGaming excepcionInfinityGaming) {
+            Toast.makeText(getApplicationContext(), excepcionInfinityGaming.getMensajeErrorUsuario(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+
 
     }
 
@@ -105,11 +122,11 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                if (opc[which].equals("Cargar Foto")) {
-                    seleccionaFoto();
-                } else {
-                    dialog.dismiss();
-                }
+                    if (opc[which].equals("Cargar Foto")) {
+                        seleccionaFoto();
+                    } else {
+                        dialog.dismiss();
+                    }
 
             }
         });
@@ -194,8 +211,6 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
 
 
 
-
-
     public void seleccionarImagen(View view) {
         cargarFoto();
     }
@@ -231,7 +246,9 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
 
         Genero genero = listaGeneros.get(desplegableGenero.getSelectedItemPosition());
         if(!descrS.isEmpty() && precioF != null && inputData != null){
+            int idVideojuego = i.getIntExtra("idVideojuego",0);
             Videojuego videojuego = new Videojuego();
+            videojuego.setIdVideojuego(idVideojuego);
             videojuego.setDescripcion(descrS);
             videojuego.setPrecio(precioF);
             videojuego.setImagen(inputData);
@@ -239,10 +256,16 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
             videojuego.setEmpleado(empleado);
 
             try {
-                c.insertarVideojuego(videojuego);
-                i = new Intent(CrearVideojuego.this, Tienda.class);
+                c.modificarVideojuego(videojuego);
+                i = new Intent(ModificarVideojuego.this, ProductDetails.class);
                 i.putExtra("idUsuario", idEmpleado);
                 i.putExtra("name", empleado.getNombre());
+                i.putExtra("image",inputData);
+                i.putExtra("price",String.valueOf(precioF));
+                i.putExtra("desc",descrS);
+                i.putExtra("idVideojuego", idVideojuego);
+                i.putExtra("idGenero", genero.getIdGenero());
+                i.putExtra("nombreGenero", genero.getNombre());
                 startActivity(i);
             } catch (ExcepcionInfinityGaming ex) {
                 Toast.makeText(getApplicationContext(), ex.getMensajeErrorUsuario(), Toast.LENGTH_SHORT).show();
@@ -256,4 +279,5 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         inputData = null;
         imagenJuego.setImageResource(R.drawable.avatar);
     }
+
 }

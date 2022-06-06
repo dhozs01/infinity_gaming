@@ -14,9 +14,12 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.infinitygaming.ComunicacionServidor;
+import com.example.infinitygaming.Genero;
 import com.example.infinitygaming.ProductDetails;
 import com.example.infinitygaming.R;
 import com.example.infinitygaming.Videojuego;
+import com.example.infinitygaming.excepciones.ExcepcionInfinityGaming;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +30,14 @@ public class VideojuegoAdapter extends RecyclerView.Adapter<VideojuegoAdapter.Vi
     Context context;
     List<Videojuego> listaVideojuegos;
     List<Videojuego> listaOriginal;
+    int idUsuario;
 
 
 
-    public VideojuegoAdapter(Context context, List<Videojuego> trendyProductsList) {
+    public VideojuegoAdapter(Context context, List<Videojuego> trendyProductsList, int idUsuario) {
         this.context = context;
         this.listaVideojuegos = trendyProductsList;
+        this.idUsuario = idUsuario;
         listaOriginal = new ArrayList<>();
         listaOriginal.addAll(listaVideojuegos);
     }
@@ -74,7 +79,7 @@ public class VideojuegoAdapter extends RecyclerView.Adapter<VideojuegoAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull VideojuegoViewHolder holder, final int position) {
-        String aux = listaVideojuegos.get(position).getPrecio() + "€";
+        String aux = String.valueOf(listaVideojuegos.get(position).getPrecio());
         byte[] aux2= listaVideojuegos.get(position).getImagen();
         Glide.with(context).load(aux2).fitCenter().into(holder.trendyImageView);
         holder.price.setText(aux);
@@ -83,13 +88,26 @@ public class VideojuegoAdapter extends RecyclerView.Adapter<VideojuegoAdapter.Vi
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(context, ProductDetails.class);
-                i.putExtra("image",aux2);
-                i.putExtra("price",aux);
-                i.putExtra("desc",listaVideojuegos.get(holder.getAdapterPosition()).getDescripcion());
-                context.startActivity(i);
+                Genero g;
+                ComunicacionServidor comunicacionServidor = new ComunicacionServidor();
+                try {
+                    g = comunicacionServidor.leerGenero(listaVideojuegos.get(holder.getAdapterPosition()).getGenero().getIdGenero());
+                    Intent i = new Intent(context, ProductDetails.class);
+                    i.putExtra("image",aux2);
+                    i.putExtra("price",aux);
+                    i.putExtra("desc",listaVideojuegos.get(holder.getAdapterPosition()).getDescripcion());
+                    i.putExtra("idVideojuego", listaVideojuegos.get(holder.getAdapterPosition()).getIdVideojuego());
+                    i.putExtra("idGenero", listaVideojuegos.get(holder.getAdapterPosition()).getGenero().getIdGenero());
+                    i.putExtra("idUsuario", idUsuario);
+                    i.putExtra("nombreGenero", g.getNombre());
+                    context.startActivity(i);
+                } catch (ExcepcionInfinityGaming excepcionInfinityGaming) {
+                    excepcionInfinityGaming.printStackTrace();
+                }
+
             }
         });
 

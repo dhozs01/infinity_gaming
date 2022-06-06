@@ -18,6 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InfinityGaming">
         <activity
+            android:name=".ModificarVideojuego"
+            android:exported="false" />
+        <activity
             android:name=".CrearVideojuego"
             android:exported="false" />
         <activity

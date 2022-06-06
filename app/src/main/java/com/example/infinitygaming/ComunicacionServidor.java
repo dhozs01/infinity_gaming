@@ -330,7 +330,7 @@ public class ComunicacionServidor {
             public void run() {
                 HashMap peticion = new HashMap();
 
-                peticion.put("peticion", "modificar producto");
+                peticion.put("peticion", "actualizar videojuego");
                 peticion.put("argumento", v.toHash());
                 resultado = null;
                 try {
@@ -501,7 +501,7 @@ public class ComunicacionServidor {
                 HashMap peticion = new HashMap();
 
                 peticion.put("peticion", "eliminar genero");
-                peticion.put("argumento", g.getGeneroId());
+                peticion.put("argumento", g.getIdGenero());
                 resultado = null;
                 try {
                     Socket socket = new Socket(IP, PUERTO);

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Infinity Gaming</string>
+    <string name="name">Nombre</string>
+    <string name="dni">DNI</string>
+    <string name="phoneNumber">Número Telefono</string>
+    <string name="card">Número Tarjeta</string>
+    <string name="password">Contraseña</string>
+    <string name="confirmPassword">Confirmar contraseña</string>
+    <string name="login">Entrar</string>
+    <string name="register">Registrarse</string>
+    <string name="search">Buscar</string>
+    <string name="gameName">Nombre juego</string>
+    <string name="addImage">Añadir imágen</string>
+    <string name="deleteImage">Borrar imágen</string>
+    <string name="gender">Género:</string>
+    <string name="rol">Rol:</string>
+    <string name="update">Actualizar</string>
+    <string name="insert">Insertar</string>
+    <string name="confirm">Confirmar</string>
+    <string name="description">Descripción juego</string>
+    <string name="price">Precio juego</string>
+    <string name="trendyGames">Juegos trendy</string>
+    <string name="buy">Comprar</string>
+    <string name="bestSellers">Mas vendidos</string>
+    <string name="buyComplete">Compra realizada</string>
+    <string name="ok">Ok</string>
+    <string name="cancel">Cancelar</string>
+    <string name="termsAndConditions">Usos y terminos</string>
+    <string name="privacyPolitics">Políticas privacidad</string>
+    <string name="contact">Contacto</string>
+    <string name="FAQ">FAQ</string>
+    <string name="title_activity_tienda_admin">TiendaAdmin</string>
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+</resources>

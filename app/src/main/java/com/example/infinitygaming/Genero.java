@@ -4,68 +4,52 @@ import java.io.Serializable;
 import java.util.HashMap;
 
 public class Genero implements Serializable {
-
-    private Integer generoId;
+    private Integer idGenero;
     private String nombre;
 
     public Genero() {
+
     }
 
-    public Genero(Integer generoId){
-        this.generoId = generoId;
-    }
-    public Genero(String nombre) {
+    public Genero(Integer idGenero, String nombre) {
+        this.idGenero = idGenero;
         this.nombre = nombre;
     }
 
-    public Genero(Integer generoId, String nombre) {
-        this.generoId = generoId;
-        this.nombre = nombre;
+    public Genero (HashMap map) {
+        if(map.containsKey("id")){
+            idGenero = (Integer) map.get("id");
+        } else {
+            idGenero = null;
+        }
+        nombre = (String) map.get("nombre");
     }
 
-
-
-
-
-
-
-    public Integer getGeneroId() {
-        return this.generoId;
+    public HashMap toHash(){
+        HashMap map = new HashMap();
+        map.put("id", idGenero);
+        map.put("nombre", nombre);
+        return map;
     }
 
-    public void setGeneroId(Integer generoId) {
-        this.generoId = generoId;
+    public int getIdGenero() {
+        return idGenero;
     }
 
-
+    public void setIdGenero(Integer idGenero) {
+        this.idGenero = idGenero;
+    }
 
     public String getNombre() {
-        return this.nombre;
+        return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
-    public HashMap toHash(){
-        HashMap map = new HashMap();
-        map.put("id", generoId);
-        map.put("nombre", nombre);
-        return map;
-    }
-
-    public Genero(HashMap map){
-        if(map.containsKey("id")){
-            generoId = (Integer) map.get("id");
-        }else{
-            generoId = null;
-        }
-        nombre = (String) map.get("nombre");
-    }
-
-
     @Override
     public String toString() {
-        return this.nombre;
+        return "Genero{" + "idGenero=" + idGenero + ", nombre=" + nombre + '}';
     }
 }

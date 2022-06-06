@@ -15,14 +15,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.infinitygaming.excepciones.ExcepcionInfinityGaming;
 
 import java.awt.font.TextAttribute;
 
 public class ProductDetails extends AppCompatActivity {
 
-    TextView nombre,precio,descripcion;
+    TextView nombre,precio,descripcion,genero;
     ImageView imagen;
-    Button buyButton;
+    Button buyButton,modificarButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,19 +35,25 @@ public class ProductDetails extends AppCompatActivity {
         String price = i.getStringExtra("price");
         String desc = i.getStringExtra("desc");
         byte[] image = i.getByteArrayExtra("image");
+        int idVideojuego = i.getIntExtra("idVideojuego",0);
+        int idGenero = i.getIntExtra("idGenero", 0);
+        String nombreGenero = i.getStringExtra("nombreGenero");
+        int idUsuario = i.getIntExtra("idUsuario",0);
 
 
-
-
-        nombre = findViewById(R.id.nombreJuego);
         precio = findViewById(R.id.price);
         imagen = findViewById(R.id.imageId);
         buyButton = findViewById(R.id.buyButton);
         descripcion = findViewById(R.id.descId);
+        modificarButton = findViewById(R.id.modificarButton);
+        genero = findViewById(R.id.genderText);
 
-        precio.setText(price);
+        comprobarRol(idUsuario);
+
+        precio.setText(price + "€");
         Glide.with(getApplicationContext()).load(image).fitCenter().into(imagen);
         descripcion.setText(desc);
+        genero.setText(nombreGenero);
 
         buyButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +64,40 @@ public class ProductDetails extends AppCompatActivity {
 
 
 
+
+
+
+        modificarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ProductDetails.this, ModificarVideojuego.class);
+                ComunicacionServidor comunicacionServidor = new ComunicacionServidor();
+
+                i.putExtra("idVideojuego", idVideojuego);
+                i.putExtra("idGenero", idGenero);
+                startActivity(i);
+            }
+        });
+
+
+
+
+    }
+
+    private void comprobarRol(int idEmpleado){
+        ComunicacionServidor comunicacionServidor = new ComunicacionServidor();
+        Empleado empleado = null;
+        try {
+            empleado = comunicacionServidor.leerEmpleado(idEmpleado);
+        } catch (ExcepcionInfinityGaming excepcionInfinityGaming) {
+            excepcionInfinityGaming.printStackTrace();
+        }
+        if(null != empleado.getRol()){
+            modificarButton.setVisibility(View.VISIBLE);
+            if(empleado.getRol().equals("Admin") || empleado.getRol().equals("Moderador")){
+                modificarButton.setVisibility(View.VISIBLE);
+            }
+        }
 
     }
 

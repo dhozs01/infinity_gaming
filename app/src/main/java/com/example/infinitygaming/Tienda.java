@@ -42,10 +42,15 @@ public class Tienda extends AppCompatActivity implements SearchView.OnQueryTextL
         addVideojuegoButton = findViewById(R.id.addVideojuegoButton);
 
 
+        Intent i = getIntent();
+        nameText.setText(i.getStringExtra("name"));
+        int idUsuario =  i.getIntExtra("idUsuario",0);
+
         addVideojuegoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(Tienda.this, CrearVideojuego.class);
+                i.putExtra("idEmpleado",idUsuario);
                 startActivity(i);
             }
         });
@@ -59,9 +64,7 @@ public class Tienda extends AppCompatActivity implements SearchView.OnQueryTextL
         });
 
 
-        Intent i = getIntent();
-        nameText.setText(i.getStringExtra("name"));
-        int idUsuario =  i.getIntExtra("idUsuario",0);
+
 
 
         try {
@@ -78,7 +81,7 @@ public class Tienda extends AppCompatActivity implements SearchView.OnQueryTextL
         } catch (ExcepcionInfinityGaming excepcionInfinityGaming) {
             excepcionInfinityGaming.printStackTrace();
         }
-        setVideojuegoRecycler(listaVideojuegos);
+        setVideojuegoRecycler(listaVideojuegos, idUsuario);
 
         searchView.setOnQueryTextListener(this);
     }
@@ -87,9 +90,9 @@ public class Tienda extends AppCompatActivity implements SearchView.OnQueryTextL
 
 
 
-    private void setVideojuegoRecycler(List<Videojuego> dataList){
+    private void setVideojuegoRecycler(List<Videojuego> dataList, int idUsuario){
         videojuegoRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
-        videojuegoAdapter = new VideojuegoAdapter(this,dataList);
+        videojuegoAdapter = new VideojuegoAdapter(this,dataList,idUsuario);
         videojuegoRecyclerView.setAdapter(videojuegoAdapter);
     }
 
