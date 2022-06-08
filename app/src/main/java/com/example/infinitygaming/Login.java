@@ -33,7 +33,7 @@ public class Login extends AppCompatActivity {
         this.pass = findViewById(R.id.passInput);
 
 
-
+        //Metodo escuchador para el boton logearse
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -60,6 +60,7 @@ public class Login extends AppCompatActivity {
             }
         });
 
+        //Metodo escuchador para el boton de registrarse
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

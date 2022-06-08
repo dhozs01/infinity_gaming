@@ -83,6 +83,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
 
     }
 
+    //Metodo que inicializa los componentes de la clase
     private void inicializarComponentes(){
         nombreJuegoText = findViewById(R.id.gameNameInput);
         descJuegoText = findViewById(R.id.descInput);
@@ -97,6 +98,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
 
     }
 
+    //Metodo que implementa la funcionalidad de cargar foto
     private void cargarFoto() {
         final CharSequence[] opc = { "Cargar Foto", "Cancelar"};
         final AlertDialog.Builder alerta_Opc = new AlertDialog.Builder((this));
@@ -116,6 +118,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         alerta_Opc.show();
     }
 
+    //Metodo que implementa la funcionalidad de seleccionar foto
     private void seleccionaFoto() {
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         pickIntent.setType("image/*");
@@ -195,7 +198,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
 
 
 
-
+    //Metodo que implementa la funcionalidad de seleccionar imagen
     public void seleccionarImagen(View view) {
         cargarFoto();
     }
@@ -212,6 +215,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         return byteBuffer.toByteArray();
     }
 
+    //Metodo que implementa la funcionalidad del boton confirmar crear Videojuego
     public void confirmar(View view){
         ComunicacionServidor c = new ComunicacionServidor();
         String descrS = descJuegoText.getText().toString();
@@ -252,6 +256,7 @@ public class CrearVideojuego extends AppCompatActivity implements ActivityCompat
         }
     }
 
+    //Metodo que implementa la funcionalidad borrar imagen
     public void borrarImagen(View view) {
         inputData = null;
         imagenJuego.setImageResource(R.drawable.avatar);

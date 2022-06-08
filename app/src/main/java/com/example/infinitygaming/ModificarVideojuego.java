@@ -83,6 +83,8 @@ public class ModificarVideojuego extends AppCompatActivity {
 
     }
 
+    //Metodo que inicializa los componentes de la clase
+
     private void inicializarComponentes(){
         nombreJuegoText = findViewById(R.id.gameNameInput);
         descJuegoText = findViewById(R.id.descInput);
@@ -114,6 +116,8 @@ public class ModificarVideojuego extends AppCompatActivity {
 
     }
 
+    //Metodo que implementa la funcionalidad de cargar foto
+
     private void cargarFoto() {
         final CharSequence[] opc = { "Cargar Foto", "Cancelar"};
         final AlertDialog.Builder alerta_Opc = new AlertDialog.Builder((this));
@@ -122,16 +126,18 @@ public class ModificarVideojuego extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-                    if (opc[which].equals("Cargar Foto")) {
-                        seleccionaFoto();
-                    } else {
-                        dialog.dismiss();
-                    }
+                if (opc[which].equals("Cargar Foto")) {
+                    seleccionaFoto();
+                } else {
+                    dialog.dismiss();
+                }
 
             }
         });
         alerta_Opc.show();
     }
+
+    //Metodo que implementa la funcionalidad de seleccionar foto
 
     private void seleccionaFoto() {
         Intent pickIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
@@ -210,6 +216,7 @@ public class ModificarVideojuego extends AppCompatActivity {
     }
 
 
+    //Metodo que implementa la funcionalidad de seleccionarImagen
 
     public void seleccionarImagen(View view) {
         cargarFoto();
@@ -226,6 +233,8 @@ public class ModificarVideojuego extends AppCompatActivity {
         }
         return byteBuffer.toByteArray();
     }
+
+    //Metodo que implementa la funcionalidad del boton confirmar modificar Videojuego
 
     public void confirmar(View view){
         ComunicacionServidor c = new ComunicacionServidor();
@@ -275,6 +284,7 @@ public class ModificarVideojuego extends AppCompatActivity {
         }
     }
 
+    //Metodo que implementa la funcionalidad borrar imagen
     public void borrarImagen(View view) {
         inputData = null;
         imagenJuego.setImageResource(R.drawable.avatar);

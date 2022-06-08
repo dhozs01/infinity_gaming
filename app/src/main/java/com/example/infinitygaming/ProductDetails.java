@@ -84,6 +84,7 @@ public class ProductDetails extends AppCompatActivity {
 
     }
 
+    //Metodo que comprueba el rol del usuario para mostrar o no el boton de modificar videojuego
     private void comprobarRol(int idEmpleado){
         ComunicacionServidor comunicacionServidor = new ComunicacionServidor();
         Empleado empleado = null;
@@ -101,6 +102,7 @@ public class ProductDetails extends AppCompatActivity {
 
     }
 
+    //Metodo que muestra un dialogo cuando se pulsa en el boton comprar
     private void mostrarDialogo(){
         AlertDialog.Builder builder = new AlertDialog.Builder(ProductDetails.this);
         builder.setTitle(R.string.buyComplete);
